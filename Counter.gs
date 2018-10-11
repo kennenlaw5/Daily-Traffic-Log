@@ -31,6 +31,8 @@ function mgrCount(range) {
           managers[current][2] += 1;
         }
       }
+    } else if (i+2 < range.length && range[i][0] == "" && range[i+1][0] == "" && range[i+2][0] == "") {
+      break;
     }
   }
   if (managers.length == 0) { return "N/A"; }
