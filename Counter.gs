@@ -1,9 +1,14 @@
 function mgrCount(range) {
   //Created By Kennen Lawrence
   //Version 1.0 10/10/18
+  
+  /* 
+  // Debug variables
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  //  var sheet = ss.getActiveSheet();
-  //  range = sheet.getRange("C2:I").getValues();
+  var sheet = ss.getActiveSheet();
+  range = sheet.getRange("C2:I").getValues();
+  */
+  
   var managers = [];
   var found = false;
   var current;
