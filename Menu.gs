@@ -1,7 +1,6 @@
 function onOpen(){
   var ui = SpreadsheetApp.getUi();
-  ui.createMenu('Utilities').addSubMenu(ui.createMenu('Help').addItem('By Phone','menuItem1').addItem('By Email','menuItem2')).addItem('Generate Sheet','duplicate')
-  .addItem('New Month', 'newMonth').addToUi();
+  ui.createMenu('Utilities').addSubMenu(ui.createMenu('Help').addItem('By Phone','menuItem1').addItem('By Email','menuItem2')).addToUi();
   var message = 'The spreadsheet has loaded successfully! Have a great day!';
   var title = 'Complete!';
   SpreadsheetApp.getActiveSpreadsheet().toast(message, title);
@@ -24,7 +23,7 @@ function menuItem2() {
 
 function getName(){
   //Created By Kennen Lawrence
-  //Version 1.1
+  //Version 1.01
   var email = Session.getActiveUser().getEmail();
   var name, first, last;
   name = email.split("@schomp.com");
