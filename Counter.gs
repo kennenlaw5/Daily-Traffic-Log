@@ -1,4 +1,4 @@
-function mgrCount(range) {
+function mgrCount(mgrs,status) {
   //Created By Kennen Lawrence
   //Version 1.0 10/10/18
   
@@ -6,32 +6,33 @@ function mgrCount(range) {
   // Debug variables
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getActiveSheet();
-  range = sheet.getRange("C2:I").getValues();
+  mgrs = sheet.getRange("C2:C").getValues();
+  status = sheet.getRange("I2:I").getValues();
   */
   
   var managers = [];
   var found = false;
   var current;
-  for (var i = 0; i < range.length; i++) {
+  for (var i = 0; i < mgrs.length; i++) {
     found = false;
-    if (range[i][0] != "" && range[i][0].toLowerCase() != "no" && range[i][0].toLowerCase() != "greet") {
+    if (mgrs[i][0] != "" && mgrs[i][0].toLowerCase() != "no" && mgrs[i][0].toLowerCase() != "greet") {
       for (var j = 0; j < managers.length && !found; j++) {
-        if (range[i][0].toLowerCase() == managers[j][0].toLowerCase()) {
+        if (mgrs[i][0].toLowerCase() == managers[j][0].toLowerCase()) {
           found = true;
           managers[j][1] += 1;
-          if (range[i][range[i].length-1].toLowerCase().indexOf("sold") != -1) {
+          if (status[i][0].toLowerCase().indexOf("sold") != -1) {
             managers[j][2] += 1;
           }
         }
       }
       if (!found) {
         current = managers.length;
-        managers[current] = [range[i][0], 1, 0];
-        if (range[i][range[i].length-1].toLowerCase().indexOf("sold") != -1) {
+        managers[current] = [mgrs[i][0], 1, 0];
+        if (status[i][0].toLowerCase().indexOf("sold") != -1) {
           managers[current][2] += 1;
         }
       }
-    } else if (i+2 < range.length && range[i][0] == "" && range[i+1][0] == "" && range[i+2][0] == "") {
+    } else if (i+2 < mgrs.length && mgrs[i][0] == "" && mgrs[i+1][0] == "" && mgrs[i+2][0] == "") {
       break;
     }
   }
