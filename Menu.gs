@@ -78,7 +78,12 @@ function duplicate() {
   }
   if (manualOverride) { sheetDate = month + '/' + day; }
   else {
-    sheetDate = new Date().toLocaleDateString().split(',')[0].split(' ');
+    sheetDate = new Date();
+    if (sheetDate.toString().split(' ')[0] == 'Sun') {
+      Logger.log('Function will not execute automatically on Sundays!');
+      return;
+    }
+    sheetDate = sheetDate.toLocaleDateString().split(',')[0].split(' ');
     sheetDate[0] = sheetDate[0].substring(0,3);
     sheetDate = sheetDate.join(' ');
   }
