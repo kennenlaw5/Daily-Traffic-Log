@@ -1,9 +1,15 @@
 function onOpen(){
   var ui = SpreadsheetApp.getUi();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
   ui.createMenu('Utilities').addSubMenu(ui.createMenu('Help').addItem('By Phone','menuItem1').addItem('By Email','menuItem2')).addToUi();
   var message = 'The spreadsheet has loaded successfully! Have a great day!';
   var title = 'Complete!';
-  SpreadsheetApp.getActiveSpreadsheet().toast(message, title);
+  var sheetDate = new Date();
+  sheetDate = sheetDate.toLocaleDateString().split(',')[0].split(' ');
+  sheetDate[0] = sheetDate[0].substring(0,3);
+  sheetDate = sheetDate.join(' ');
+  ss.setActiveSheet(ss.getSheetByName(sheetDate));
+  ss.toast(message, title);
 }
 
 function menuItem1() {
@@ -40,7 +46,7 @@ function getName(){
 function duplicate() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var master = ss.getSheetByName('MASTER');
-  var sheetDate, month, day;
+  var sheetDate, month, day, sheet;
   var check = false;
   var manualOverride = false;
   
@@ -87,10 +93,12 @@ function duplicate() {
     sheetDate[0] = sheetDate[0].substring(0,3);
     sheetDate = sheetDate.join(' ');
   }
-  if (ss.getSheetByName(sheetDate) != null) { 
+  if (ss.getSheetByName(sheetDate) != null) {
     throw 'The sheet "' + sheetDate + '" already exists. Manual Override is required.';
     return;
   }
-  ss.setActiveSheet(master.copyTo(ss).setName(sheetDate))
+  sheet = master.copyTo(ss).setName(sheetDate);
+  ss.setActiveSheet(sheet)
   ss.moveActiveSheet(2);
+  sheet.activate();
 }
